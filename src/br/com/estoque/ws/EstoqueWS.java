@@ -2,7 +2,10 @@ package br.com.estoque.ws;
 
 import br.com.estoque.modelo.item.Item;
 import br.com.estoque.modelo.item.ItemDao;
+import br.com.estoque.modelo.item.ListaItens;
 
+import javax.jws.WebMethod;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import java.util.List;
 
@@ -14,8 +17,10 @@ public class EstoqueWS {
 
     private ItemDao dao = new ItemDao();
 
-    public List<Item> getItens() {
+    @WebMethod(operationName = "todosOsItens")
+    @WebResult(name = "itens")
+    public ListaItens getItens() {
         System.out.println("Chamando todosItens()");
-        return dao.todosItens();
+        return new ListaItens(dao.todosItens());
     }
 }
